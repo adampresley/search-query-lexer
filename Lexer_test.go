@@ -124,6 +124,26 @@ func TestTokenize(t *testing.T) {
 			config: defaultConfig,
 		},
 		{
+			name:  "value and value",
+			input: "yummy and sweet",
+			want: []*sql.Token{
+				sql.NewToken(sql.TokenTypeValue, "yummy"),
+				sql.NewToken(sql.TokenTypeConnective, "and"),
+				sql.NewToken(sql.TokenTypeValue, "sweet"),
+			},
+			config: defaultConfig,
+		},
+		{
+			name:  "value or value",
+			input: "salty or sweet",
+			want: []*sql.Token{
+				sql.NewToken(sql.TokenTypeValue, "salty"),
+				sql.NewToken(sql.TokenTypeConnective, "or"),
+				sql.NewToken(sql.TokenTypeValue, "sweet"),
+			},
+			config: defaultConfig,
+		},
+		{
 			name:  "subquery test (no spaces)",
 			input: "title =~ testing AND (name=\"Adam\" OR name=\"Bob\")",
 			want: []*sql.Token{
